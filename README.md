@@ -25,6 +25,8 @@ python tools/build_all.py work bremen     # einzelne
 
 ## Lizenz
 
+Skripte: Copyright © 2026 Florian Willnat, [GNU GPL v3 oder später](LICENSE).
+
 Daten © OpenStreetMap-Mitwirkende, verfügbar unter der
 [Open Database License (ODbL) 1.0](https://opendatacommons.org/licenses/odbl/1-0/).
 Die Pakete sind eine abgeleitete Datenbank und stehen ebenfalls unter der ODbL.
