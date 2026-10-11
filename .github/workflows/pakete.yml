@@ -1,0 +1,66 @@
+name: Offline-Pakete bauen
+
+on:
+  schedule:
+    - cron: "0 3 10 * *" # monatlich am 10., 03:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pakete
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten
+        run: pip install -r tools/requirements.txt
+
+      - name: Pakete aus Geofabrik-Extrakten bauen
+        run: python tools/build_all.py work --delete-pbf
+
+      - name: Release veröffentlichen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          DATE=$(python -c "import json; print(max(p['date'] for p in json.load(open('work/out/index.json'))['packages'].values()))")
+          COUNT=$(python -c "import json; print(len(json.load(open('work/out/index.json'))['packages']))")
+          test "$COUNT" -eq 16
+          TAG="daten-$DATE"
+          gh release delete "$TAG" --yes --cleanup-tag || true
+          gh release create "$TAG" work/out/*.wepk work/out/index.json \
+            --title "Straßendaten, Stand $DATE" \
+            --notes "Offline-Pakete für die App „was erlaubt“, gebaut aus Geofabrik-Extrakten. Daten © OpenStreetMap-Mitwirkende, ODbL 1.0." \
+            --latest
+          # Nur die letzten drei Stände behalten
+          gh release list --limit 100 --json tagName,createdAt --jq 'sort_by(.createdAt) | reverse | .[3:][].tagName' \
+            | xargs -r -n1 gh release delete --yes --cleanup-tag
+          echo "DATE=$DATE" >> "$GITHUB_ENV"
+
+      # Ein Commit pro Lauf hält den Zeitplan aktiv (GitHub pausiert Zeitpläne nach 60 Tagen ohne Aktivität)
+      - name: Stand festhalten
+        run: |
+          python - <<'PY'
+          import json, os
+          idx = json.load(open("work/out/index.json"))
+          lines = ["# Aktueller Stand", "", f"Datenstand: {os.environ['DATE']}", "", "| Bundesland | Größe |", "|---|---:|"]
+          for k, v in idx["packages"].items():
+              lines.append(f"| {k} | {v['size'] / 1e6:.1f} MB |")
+          lines.append(f"| **gesamt** | **{sum(v['size'] for v in idx['packages'].values()) / 1e6:.1f} MB** |")
+          open("STAND.md", "w", encoding="utf-8").write("\n".join(lines) + "\n")
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add STAND.md
+          git commit -m "Stand $DATE" || echo "keine Änderung"
+          git push
