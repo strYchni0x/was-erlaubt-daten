@@ -1,6 +1,6 @@
 # was erlaubt – Offline-Straßendaten
 
-Offline-Pakete für die Android-App „was erlaubt“, die das erlaubte Tempolimit passend zur
+Offline-Pakete für die Android-App [„was erlaubt“](https://github.com/strYchni0x/was-erlaubt-app), die das erlaubte Tempolimit passend zur
 Fahrtrichtung anzeigt. Je Bundesland ein Paket (`<bundesland>.wepk`) plus `index.json`.
 
 Die Pakete werden monatlich per GitHub Action aus den
