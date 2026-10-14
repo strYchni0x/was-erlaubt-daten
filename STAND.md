@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Datenstand: 2026-10-09
+Datenstand: 2026-10-13
 
 | Bundesland | Größe |
 |---|---:|
@@ -12,7 +12,7 @@ Datenstand: 2026-10-09
 | hamburg | 1.8 MB |
 | hessen | 14.8 MB |
 | mecklenburg-vorpommern | 4.8 MB |
-| niedersachsen | 21.8 MB |
+| niedersachsen | 21.9 MB |
 | nordrhein-westfalen | 34.0 MB |
 | rheinland-pfalz | 12.2 MB |
 | saarland | 2.3 MB |
@@ -20,4 +20,4 @@ Datenstand: 2026-10-09
 | sachsen-anhalt | 8.0 MB |
 | schleswig-holstein | 7.0 MB |
 | thueringen | 6.7 MB |
-| **gesamt** | **204.5 MB** |
+| **gesamt** | **204.6 MB** |
