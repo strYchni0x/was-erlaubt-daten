@@ -2,7 +2,7 @@ name: Offline-Pakete bauen
 
 on:
   schedule:
-    - cron: "0 3 10 * *" # monatlich am 10., 03:00 UTC
+    - cron: "0 3 * * 1" # wöchentlich montags, 03:00 UTC
   workflow_dispatch:
 
 permissions:
@@ -42,8 +42,8 @@ jobs:
             --title "Straßendaten, Stand $DATE" \
             --notes "Offline-Pakete für die App „was erlaubt“, gebaut aus Geofabrik-Extrakten. Daten © OpenStreetMap-Mitwirkende, ODbL 1.0." \
             --latest
-          # Nur die letzten drei Stände behalten
-          gh release list --limit 100 --json tagName,createdAt --jq 'sort_by(.createdAt) | reverse | .[3:][].tagName' \
+          # Nur die letzten vier Stände (ca. ein Monat) behalten
+          gh release list --limit 100 --json tagName,createdAt --jq 'sort_by(.createdAt) | reverse | .[4:][].tagName' \
             | xargs -r -n1 gh release delete --yes --cleanup-tag
           echo "DATE=$DATE" >> "$GITHUB_ENV"
 

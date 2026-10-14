@@ -3,7 +3,7 @@
 Offline-Pakete für die Android-App [„was erlaubt“](https://github.com/strYchni0x/was-erlaubt-app), die das erlaubte Tempolimit passend zur
 Fahrtrichtung anzeigt. Je Bundesland ein Paket (`<bundesland>.wepk`) plus `index.json`.
 
-Die Pakete werden monatlich per GitHub Action aus den
+Die Pakete werden wöchentlich (montags) per GitHub Action aus den
 [Geofabrik-Extrakten](https://download.geofabrik.de/europe/germany.html) gebaut und als
 Release veröffentlicht. Die App lädt sie von
 `https://github.com/strYchni0x/was-erlaubt-daten/releases/latest/download/`.
