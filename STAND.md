@@ -1,11 +1,11 @@
 # Aktueller Stand
 
-Datenstand: 2026-10-25
+Datenstand: 2026-11-01
 
 | Bundesland | Größe |
 |---|---:|
 | baden-wuerttemberg | 27.8 MB |
-| bayern | 38.1 MB |
+| bayern | 38.2 MB |
 | berlin | 3.6 MB |
 | brandenburg | 10.4 MB |
 | bremen | 0.8 MB |
@@ -20,4 +20,4 @@ Datenstand: 2026-10-25
 | sachsen-anhalt | 8.0 MB |
 | schleswig-holstein | 7.0 MB |
 | thueringen | 6.7 MB |
-| **gesamt** | **204.7 MB** |
+| **gesamt** | **204.8 MB** |
