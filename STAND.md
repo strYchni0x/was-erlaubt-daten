@@ -1,6 +1,6 @@
 # Aktueller Stand
 
-Datenstand: 2026-11-08
+Datenstand: 2026-11-15
 
 | Bundesland | Größe |
 |---|---:|
@@ -20,4 +20,4 @@ Datenstand: 2026-11-08
 | sachsen-anhalt | 8.0 MB |
 | schleswig-holstein | 7.0 MB |
 | thueringen | 6.7 MB |
-| **gesamt** | **204.9 MB** |
+| **gesamt** | **205.0 MB** |
