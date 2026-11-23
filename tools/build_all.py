@@ -57,8 +57,8 @@ def main():
     for region in regions:
         pbf = os.path.join(pbf_dir, f"{region}-latest.osm.pbf")
         poly = os.path.join(pbf_dir, f"{region}.poly")
-        fetch(BASE + f"{region}-latest.osm.pbf", pbf)
-        fetch(BASE + f"{region}.poly", poly)
+        fetch(BASE + f"{region}/{region}-latest.osm.pbf", pbf)
+        fetch(BASE + f"{region}/{region}.poly", poly)
         build(pbf, poly, os.path.join(out_dir, f"{region}.wepk"))
         if delete_pbf:
             os.remove(pbf)
